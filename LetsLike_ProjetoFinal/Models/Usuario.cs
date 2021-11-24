@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace LetsLike_ProjetoFinal.Models
 {
+    [Table("USUARIO")]
     public class Usuario
     {
         [Column("ID"), Required]

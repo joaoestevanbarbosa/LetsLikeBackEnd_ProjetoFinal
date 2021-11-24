@@ -42,7 +42,7 @@ namespace LetsLike_ProjetoFinal.Migrations
                         column: x => x.IdUsuarioCadastro,
                         principalTable: "Usuario",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
