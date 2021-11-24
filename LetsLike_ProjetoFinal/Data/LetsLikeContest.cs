@@ -13,6 +13,7 @@ namespace LetsLike_ProjetoFinal.Data
         //TODO instancia das models
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Projeto> Projetos { get; set; }
+        public DbSet<UsuarioLikeProjeto> UsuariosLikeProjetos { get; set; }
 
 
         public LetsLikeContest(DbContextOptions<LetsLikeContest> options) : base(options)
@@ -34,7 +35,7 @@ namespace LetsLike_ProjetoFinal.Data
             //TODO ApplyConfiguration aplica as configurações de entidade que criamos
             modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
             modelBuilder.ApplyConfiguration(new ProjetoConfiguration());
-            // modelBuilder.ApplyConfiguration(new UsuarioLikeProjetoConfiguration());
+            modelBuilder.ApplyConfiguration(new UsuarioLikeProjetoConfiguration());
         }
     }
 }

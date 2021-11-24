@@ -3,14 +3,16 @@ using LetsLike_ProjetoFinal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LetsLike_ProjetoFinal.Migrations
 {
     [DbContext(typeof(LetsLikeContest))]
-    partial class LetsLikeContestModelSnapshot : ModelSnapshot
+    [Migration("20211124204934_MigracaoInicial")]
+    partial class MigracaoInicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,7 +120,7 @@ namespace LetsLike_ProjetoFinal.Migrations
                         .WithMany("Projeto")
                         .HasForeignKey("IdUsuarioCadastro")
                         .HasConstraintName("FK_PROJETO_USUARIO_ID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("UsuarioCadastro");
@@ -130,14 +132,14 @@ namespace LetsLike_ProjetoFinal.Migrations
                         .WithMany("ProjetoLikeUsuario")
                         .HasForeignKey("IdProjetoLike")
                         .HasConstraintName("FK_PROJETO_USUARIO_LIKE_PROJETO")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LetsLike_ProjetoFinal.Models.Usuario", "UsuarioLike")
                         .WithMany("UsuarioLikeProjeto")
                         .HasForeignKey("IdUsuarioLike")
                         .HasConstraintName("FK_USUARIO_USUARIO_LIKE_PROJETO")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ProjetoLike");
