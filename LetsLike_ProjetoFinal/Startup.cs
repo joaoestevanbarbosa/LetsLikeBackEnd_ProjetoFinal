@@ -1,6 +1,8 @@
+using LetsLike_ProjetoFinal.Configurations;
 using LetsLike_ProjetoFinal.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -34,11 +36,20 @@ namespace LetsLike_ProjetoFinal
               options => options.
               UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            //TODO adicionar o contexto ao escopo inicial
+            services.AddDbContext<LetsLikeContest>();
+
+            //TODO indicando acessos ao HTTP Context para trabalhar com os retornos http
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "LetsLike_ProjetoFinal", Version = "v1" });
             });
+
+            //TODO adicionando a Inversão de controle criada na Classe Factory
+            RegisterServicesPrivate(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +72,12 @@ namespace LetsLike_ProjetoFinal
             {
                 endpoints.MapControllers();
             });
+        }
+
+        // TODO método criado para instanciar a factory
+        private void RegisterServicesPrivate(IServiceCollection services)
+        {
+            Factory.RegisterServices(services);
         }
     }
 }
