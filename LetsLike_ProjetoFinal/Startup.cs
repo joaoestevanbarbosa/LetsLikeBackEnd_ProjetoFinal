@@ -14,6 +14,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 
@@ -46,6 +47,7 @@ namespace LetsLike_ProjetoFinal
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "LetsLike_ProjetoFinal", Version = "v1" });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             });
 
             //TODO adicionando a Inversão de controle criada na Classe Factory

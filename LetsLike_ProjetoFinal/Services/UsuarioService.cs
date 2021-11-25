@@ -16,6 +16,11 @@ namespace LetsLike_ProjetoFinal.Services
             _contexto = contexto;
         }
 
+        public IList<Usuario> FindAllUsuarios()
+        {
+            throw new NotImplementedException();
+        }
+
         public Usuario SaveOrUpdate(Usuario usuario)
         {
             //TODO se eu estou salvando e atualizando no mesmo método
