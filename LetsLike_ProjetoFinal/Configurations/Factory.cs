@@ -12,8 +12,10 @@ namespace LetsLike_ProjetoFinal.Configurations
     {
         public static void RegisterServices (IServiceCollection services)
         {
-            //TODO adicionar as referências de services com as refer^^encias de interfaces
+            // Adicionando Services
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IProjetoService, ProjetoService>();
+            services.AddScoped<IUsuarioLikeProjetoService, UsuarioLikeProjetoService>();
         }
     }
 }
