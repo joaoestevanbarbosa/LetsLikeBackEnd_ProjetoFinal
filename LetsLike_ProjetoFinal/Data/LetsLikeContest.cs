@@ -15,7 +15,6 @@ namespace LetsLike_ProjetoFinal.Data
         public DbSet<Projeto> Projetos { get; set; }
         public DbSet<UsuarioLikeProjeto> UsuariosLikeProjetos { get; set; }
 
-
         public LetsLikeContest(DbContextOptions<LetsLikeContest> options) : base(options)
         {
 

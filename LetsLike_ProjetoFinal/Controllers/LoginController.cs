@@ -3,21 +3,17 @@ using LetsLike_ProjetoFinal.DTO;
 using LetsLike_ProjetoFinal.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace LetsLike_ProjetoFinal.Controllers
 {
-    public class LoginController
+
+    [Produces("application/json")]
+    [ApiController]
+    [Route("api/[controller]")]
+    public class LoginController : ControllerBase
     {
-        [Produces("application/json")]
-        [ApiController]
-        [Route("api/[controller]")]
         //[Authorize]
-        public class LoginController : ControllerBase
-        {
             private readonly IUsuarioService _usuarioService;
             private readonly IMapper _mapper;
 
@@ -27,25 +23,33 @@ namespace LetsLike_ProjetoFinal.Controllers
                 _mapper = mapper;
             }
 
+             // Post api/login
+            /// <summary>
+            ///     Valida usuário email/senha
+            /// </summary>
+            /// <returns>Usuários cadastrados na base de dados</returns>
+            /// <response code="200">Se usuário email/senha estão corretos</response>
+            /// <response code="404">Se email/senha não conferem</response>    
             [HttpPost]
             [ProducesResponseType(StatusCodes.Status200OK)]
             [ProducesResponseType(StatusCodes.Status400BadRequest)]
             [ProducesResponseType(StatusCodes.Status404NotFound)]
-            public ActionResult<bool> Post([FromBody] LoginDTO value)
+            public ActionResult<bool> Login([FromBody] LoginDTO value)
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                var findUser = _usuarioService.FindByUsername(value.Username);
+                var findUser = _usuarioService.FindByUserName(value.Username);
 
                 if (findUser == null)
+                {
                     return NotFound();
-
+                 }
+             
                 var verify = _usuarioService.VerifyPassword(value.Senha, findUser.Id);
 
-                return Ok(verify);
+                return Ok(verify); /// <returns>Usuários cadastrados na base de dados</returns>
 
             }
-        }
     }
 }

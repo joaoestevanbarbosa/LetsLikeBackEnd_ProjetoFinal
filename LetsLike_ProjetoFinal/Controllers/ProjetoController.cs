@@ -66,6 +66,7 @@ namespace LetsLike_ProjetoFinal.Controllers
             };
 
             var registryUser = _projetoService.SaveOrUpdate(usuario);
+
             if (registryUser != null)
             {
                 return Ok(registryUser);
@@ -76,6 +77,7 @@ namespace LetsLike_ProjetoFinal.Controllers
                 NotFoundObjectResult notfound = new NotFoundObjectResult(res);
                 notfound.StatusCode = 400;
                 notfound.Value = "Erro ao cadastrar Usuário!";
+
                 return NotFound(notfound);
             }
 
@@ -126,6 +128,7 @@ namespace LetsLike_ProjetoFinal.Controllers
                 NotFoundObjectResult notfound = new NotFoundObjectResult(res);
                 notfound.StatusCode = 400;
                 notfound.Value = "Erro ao cadastrar Usuário!";
+
                 return NotFound(notfound);
             }
         }
@@ -142,12 +145,15 @@ namespace LetsLike_ProjetoFinal.Controllers
         public ActionResult<IList<Usuario>> Get()
         {
             var projetos = _projetoService.GetAll();
+
             if (projetos != null)
             {
                 return Ok(projetos.Select(x => _mapper.Map<Projeto>(x)).ToList());
             }
             else
+            { 
                 return NotFound();
+            }
         }
     }
 }

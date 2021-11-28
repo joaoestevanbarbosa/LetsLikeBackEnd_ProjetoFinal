@@ -36,6 +36,7 @@ namespace LetsLike_ProjetoFinal.Services
         {
             var response = _context.UsuariosLikeProjetos.Where(x => x.IdProjetoLike.Equals(IdProjeto)
             && x.IdUsuarioLike.Equals(IdUsuario)).FirstOrDefault();
+
             return response;
         }
     }

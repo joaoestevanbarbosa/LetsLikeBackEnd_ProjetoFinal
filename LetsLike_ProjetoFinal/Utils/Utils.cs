@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace LetsLike_ProjetoFinal.Utils
 {
-    public class Utils
+    public static class Utils
     {
         public static string DecryptValue(string valueDecrypt)
         {
@@ -20,6 +21,7 @@ namespace LetsLike_ProjetoFinal.Utils
         public static string EncryptValue(string valueEncrypt)
         {
             Byte[] b = System.Text.ASCIIEncoding.ASCII.GetBytes(valueEncrypt);
+
             string encryptedConnection = Convert.ToBase64String(b);
             return encryptedConnection;
 
